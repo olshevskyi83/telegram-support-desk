@@ -1,0 +1,37 @@
+services:
+  api:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
+    command: >
+      sh -c "pip install -r requirements.txt &&
+             python api/app.py"
+    ports:
+      - "5001:5001"
+
+  admin:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
+    command: >
+      sh -c "pip install -r requirements.txt &&
+             python admin/panel.py"
+    ports:
+      - "5002:5002"
+
+  bot:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
+    command: >
+      sh -c "pip install -r requirements.txt &&
+             python bot/support_bot.py"
